@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Workshop 2025 - Learn Modern AI in 1 Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: #020617;
+      --accent: #22c55e;
+      --accent-alt: #38bdf8;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --danger: #f97373;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    /* -------- Animated partial background (particles) -------- */
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bg-particles span {
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.9), transparent);
+      opacity: 0.4;
+      filter: blur(1px);
+      animation: floatUp 22s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    /* Different positions, sizes & speeds for variety */
+    .bg-particles span:nth-child(1) {
+      left: 8%;
+      bottom: -10%;
+      width: 12px;
+      height: 12px;
+      animation-duration: 24s;
+    }
+    .bg-particles span:nth-child(2) {
+      left: 22%;
+      bottom: -15%;
+      width: 8px;
+      height: 8px;
+      animation-duration: 18s;
+      animation-delay: 3s;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.9), transparent);
+    }
+    .bg-particles span:nth-child(3) {
+      left: 40%;
+      bottom: -18%;
+      width: 14px;
+      height: 14px;
+      animation-duration: 26s;
+      animation-delay: 6s;
+    }
+    .bg-particles span:nth-child(4) {
+      left: 60%;
+      bottom: -12%;
+      width: 9px;
+      height: 9px;
+      animation-duration: 20s;
+      animation-delay: 1s;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.9), transparent);
+    }
+    .bg-particles span:nth-child(5) {
+      left: 78%;
+      bottom: -20%;
+      width: 11px;
+      height: 11px;
+      animation-duration: 23s;
+      animation-delay: 4s;
+    }
+    .bg-particles span:nth-child(6) {
+      left: 90%;
+      bottom: -18%;
+      width: 7px;
+      height: 7px;
+      animation-duration: 19s;
+      animation-delay: 2s;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.9), transparent);
+    }
+
+    /* A few near the top (partial background feel) */
+    .bg-particles span:nth-child(7) {
+      left: 15%;
+      top: -12%;
+      width: 9px;
+      height: 9px;
+      animation-duration: 21s;
+      animation-delay: 5s;
+    }
+    .bg-particles span:nth-child(8) {
+      left: 33%;
+      top: -15%;
+      width: 6px;
+      height: 6px;
+      animation-duration: 17s;
+      animation-delay: 2s;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.9), transparent);
+    }
+    .bg-particles span:nth-child(9) {
+      left: 55%;
+      top: -18%;
+      width: 10px;
+      height: 10px;
+      animation-duration: 25s;
+      animation-delay: 7s;
+    }
+    .bg-particles span:nth-child(10) {
+      left: 72%;
+      top: -10%;
+      width: 8px;
+      height: 8px;
+      animation-duration: 19s;
+      animation-delay: 3s;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-130vh) translateX(30px);
+        opacity: 0;
+      }
+    }
+
+    /* ---------------- Header ---------------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #22c55e, #38bdf8, #f97316, #22c55e);
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 25%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 20%, #fff, transparent);
+      opacity: 0.35;
+    }
+
+    .logo span {
+      background: linear-gradient(to right, #22c55e, #38bdf8);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.3rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.1rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.15rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #22c55e, #38bdf8);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #020617;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      box-shadow: 0 12px 32px rgba(34, 197, 94, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 38px rgba(56, 189, 248, 0.5);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 18px;
+      height: 2px;
+      background: #e5e7eb;
+    }
+
+    /* ---------------- General Sections ---------------- */
+    section {
+      padding: 3.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ---------------- Hero ---------------- */
+    #hero {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.25), transparent);
+      filter: blur(20px);
+      top: -60px;
+      left: -120px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-glow.blue {
+      left: auto;
+      right: -140px;
+      top: auto;
+      bottom: -80px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.25), transparent);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e0f2fe;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(to right, #22c55e, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-typed {
+      font-size: 0.95rem;
+      color: #a5b4fc;
+      margin-bottom: 1.5rem;
+      min-height: 1.4em;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #a855f7;
+      box-sizing: border-box;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #020617;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.5);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 48px rgba(56, 189, 248, 0.55);
+    }
+
+    .btn-outline {
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: transparent;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: border 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-outline span {
+      font-size: 1.1rem;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(249, 250, 251, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.85);
+    }
+
+    /* Hero right visual */
+    .hero-card {
+      position: relative;
+      border-radius: 1.4rem;
+      padding: 1.4rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #22c55e22, #020617 60%);
+      box-shadow: 0 22px 70px rgba(15, 23, 42, 0.95);
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .hero-card-inner {
+      border-radius: 1.1rem;
+      padding: 1rem 1rem 1.2rem;
+      border: 1px dashed rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at 10% 0, #38bdf826, #020617 65%);
+      font-size: 0.82rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      top: -40px;
+      right: -80px;
+      opacity: 0.6;
+      animation: orbit 12s linear infinite;
+    }
+
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      top: 50%;
+      left: -6px;
+      transform: translateY(-50%);
+    }
+
+    @keyframes orbit {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero-card-status {
+      font-size: 0.68rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.08);
+      border: 1px solid rgba(22, 163, 74, 0.5);
+      color: #bbf7d0;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .stat-card {
+      border-radius: 0.9rem;
+      padding: 0.7rem 0.8rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.32rem;
+      font-size: 0.7rem;
+      padding: 0.14rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.2);
+      color: #e5e7eb;
+    }
+
+    .hero-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-pill-sm {
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    /* ---------------- About / What you'll learn ---------------- */
+
+    #about .content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.3rem;
+      align-items: center;
+    }
+
+    #about p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      margin-bottom: 1.05rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.6rem;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+    }
+
+    .about-card {
+      border-radius: 1.1rem;
+      padding: 1.4rem 1.3rem 1.5rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #22c55e1c, #020617 60%);
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      box-shadow: 0 20px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .about-card strong {
+      color: #e5e7eb;
+    }
+
+    .about-list {
+      list-style: none;
+      margin-top: 0.4rem;
+      font-size: 0.84rem;
+    }
+
+    .about-list li {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.32rem;
+    }
+
+    .about-list li::before {
+      content: "•";
+      color: var(--accent);
+    }
+
+    /* ---------------- Schedule / Agenda ---------------- */
+    #agenda .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+    }
+
+    .agenda-card {
+      border-radius: 1rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 0.86rem;
+    }
+
+    .agenda-time {
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      margin-bottom: 0.2rem;
+    }
+
+    .agenda-title {
+      font-size: 0.96rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .agenda-desc {
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ---------------- Speakers ---------------- */
+    #speakers .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .speaker-card {
+      border-radius: 1rem;
+      padding: 1.1rem 1rem 1.2rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #38bdf814, #020617 60%);
+      font-size: 0.86rem;
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+    }
+
+    .speaker-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      margin: 0 auto 0.6rem;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+    }
+
+    .speaker-name {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .speaker-role {
+      font-size: 0.78rem;
+      color: #a5b4fc;
+      margin-bottom: 0.4rem;
+    }
+
+    .speaker-bio {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------------- Pricing / CTA ---------------- */
+    #pricing .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .price-card {
+      border-radius: 1rem;
+      padding: 1.3rem 1.1rem 1.4rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.96);
+      font-size: 0.86rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .price-card.featured {
+      background: radial-gradient(circle at top left, #22c55e20, #020617 60%);
+      border-color: rgba(34, 197, 94, 0.7);
+      box-shadow: 0 24px 60px rgba(34, 197, 94, 0.35);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.7rem;
+      padding: 0.16rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      color: #bbf7d0;
+    }
+
+    .price-name {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .price-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .price-value span {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+    }
+
+    .price-desc {
+      color: var(--text-muted);
+    }
+
+    .price-list {
+      list-style: none;
+      margin-top: 0.2rem;
+      font-size: 0.83rem;
+    }
+
+    .price-list li {
+      display: flex;
+      gap: 0.35rem;
+      margin-bottom: 0.26rem;
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-top: 0.03rem;
+    }
+
+    .price-cta {
+      margin-top: auto;
+    }
+
+    .price-cta button {
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.96);
+      font-size: 0.8rem;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .price-card.featured .price-cta button {
+      border-color: rgba(34, 197, 94, 0.8);
+      background: rgba(22, 163, 74, 0.18);
+    }
+
+    /* ---------------- FAQ ---------------- */
+    #faq .faq-list {
+      max-width: 720px;
+      margin: 0.5rem auto 0;
+    }
+
+    .faq-item {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.7rem;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    .faq-question h3 {
+      font-size: 0.9rem;
+    }
+
+    .faq-icon {
+      font-size: 1rem;
+      color: #9ca3af;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-answer {
+      margin-top: 0.45rem;
+      color: var(--text-muted);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(90deg);
+    }
+
+    /* ---------------- Contact / Registration Form ---------------- */
+    #contact .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .contact-text {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-muted);
+    }
+
+    .contact-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .form-card {
+      border-radius: 1.2rem;
+      padding: 1.4rem 1.4rem 1.6rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #38bdf820, #020617 60%);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.98);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.78rem;
+      color: #d1d5db;
+    }
+
+    .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 0.6rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.97);
+      color: var(--text-main);
+      outline: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(148, 163, 184, 0.8);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(56, 189, 248, 0.95);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      margin-top: 3px;
+    }
+
+    .form-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .form-submit {
+      margin-top: 0.2rem;
+    }
+
+    .form-submit button {
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #020617;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.6);
+    }
+
+    /* ---------------- Footer ---------------- */
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.95);
+      background: #020617;
+      padding: 1.3rem 0 1.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+    }
+
+    .footer-links a:hover {
+      color: #f3f4f6;
+    }
+
+    /* ---------------- Scroll reveal base ---------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------------- Responsive ---------------- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: -1;
+        margin-bottom: 0.8rem;
+      }
+
+      #about .content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #agenda .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #speakers .cards,
+      #pricing .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #contact .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links.mobile-open {
+        display: flex;
+        position: absolute;
+        top: 54px;
+        right: 4%;
+        flex-direction: column;
+        background: rgba(2, 6, 23, 0.98);
+        border-radius: 0.9rem;
+        padding: 0.7rem 0.9rem;
+        border: 1px solid rgba(31, 41, 55, 0.98);
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 1);
+      }
+
+      #speakers .cards,
+      #pricing .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-typed {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated partial background particles -->
+  <div class="bg-particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <span>AI Workshop</span>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#contact">Register</a>
+      </nav>
+
+      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Get Ticket
+      </button>
+
+      <div class="nav-toggle" id="navToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow blue"></div>
+
+    <div class="container hero">
+      <div class="reveal">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          In-person & Live • Limited seats
+        </div>
+
+        <h1>
+          Level up with the <span>AI Workshop 2025</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          A one-day, hands-on workshop where you’ll build AI-powered apps,
+          understand real-world use cases, and leave with deployable projects.
+        </p>
+
+        <div class="hero-typed" id="typedText"></div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Reserve Your Seat
+          </button>
+          <button class="btn-outline" onclick="document.getElementById('agenda').scrollIntoView({behavior:'smooth'})">
+            View full agenda <span>→</span>
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <span><span class="hero-meta-dot"></span> Date: 15 March 2025</span>
+          <span><span class="hero-meta-dot"></span> Location: Ranchi, India</span>
+          <span><span class="hero-meta-dot"></span> Certificate of completion</span>
+        </div>
+      </div>
+
+      <!-- Hero visual card -->
+      <aside class="hero-card reveal" id="heroCard" aria-hidden="true">
+        <div class="hero-orbit"></div>
+        <div class="hero-card-inner">
+          <div class="hero-card-header">
+            <div class="hero-card-title">Workshop Snapshot</div>
+            <div class="hero-card-status">Registrations open</div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-label">Spots Available</div>
+              <div class="stat-value counter" data-target="80">0</div>
+              <div class="stat-pill">Small, focused cohort</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Projects You'll Build</div>
+              <div class="stat-value counter" data-target="3">0</div>
+              <div class="stat-pill">Chatbot • Classifier • AI tool</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Hours of Learning</div>
+              <div class="stat-value counter" data-target="7">0</div>
+              <div class="stat-pill">Live coding & labs</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Past Feedback</div>
+              <div class="stat-value">4.9/5</div>
+              <div class="stat-pill">From 300+ attendees</div>
+            </div>
+          </div>
+
+          <div class="hero-card-footer">
+            <div class="hero-pill-sm">No prior AI experience required</div>
+            <span>Beginner to intermediate friendly</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- About / What you'll learn -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">About the Workshop</div>
+        <h2 class="section-title">Build with AI, not just learn about it.</h2>
+        <p class="section-subtitle">
+          This isn’t a long lecture. It’s a practical, hands-on experience where
+          you’ll ship real mini-projects using modern AI tools and APIs.
+        </p>
+      </div>
+
+      <div class="content">
+        <div class="reveal">
+          <p>
+            We’ll start from the basics of how modern AI models work, then
+            quickly move into building actual applications — from chatbots to
+            smart assistants and AI-powered workflows.
+          </p>
+          <p>
+            You’ll follow along with live coding, get starter templates, and
+            walk away with code you can reuse in your own projects or portfolio.
+          </p>
+
+          <div class="pill-row">
+            <div class="pill">Prompt engineering basics</div>
+            <div class="pill">LLMs & embeddings</div>
+            <div class="pill">AI in web apps</div>
+            <div class="pill">Best practices & safety</div>
+          </div>
+        </div>
+
+        <aside class="about-card reveal">
+          <p>
+            <strong>By the end of the day, you’ll have:</strong>
+          </p>
+          <ul class="about-list">
+            <li>A clear mental model of how modern AI systems work</li>
+            <li>Three working projects you can show in your portfolio</li>
+            <li>Experience integrating AI into a web app using APIs</li>
+            <li>Templates and code snippets to reuse later</li>
+          </ul>
+          <br />
+          <p>
+            This workshop is perfect for students, developers, designers and
+            professionals who want to add AI skills to their toolkit without
+            getting lost in heavy maths.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda / Schedule -->
+  <section id="agenda">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Agenda</div>
+        <h2 class="section-title">One intense, focused day of learning.</h2>
+        <p class="section-subtitle">
+          We split the workshop into digestible blocks, with breaks, Q&A and
+          hands-on labs in between.
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="agenda-card reveal">
+          <div class="agenda-time">10:00 AM – 12:00 PM</div>
+          <div class="agenda-title">Session 1: Foundations of Modern AI</div>
+          <div class="agenda-desc">
+            Understand how large language models work, what they can and can’t
+            do, and how to talk to them effectively with prompts.
+          </div>
+          <ul class="about-list">
+            <li>AI concepts in simple language</li>
+            <li>Prompt engineering patterns</li>
+            <li>Live demo: AI assistant in the browser</li>
+          </ul>
+        </div>
+
+        <div class="agenda-card reveal">
+          <div class="agenda-time">12:00 PM – 2:00 PM</div>
+          <div class="agenda-title">Session 2: Build Your First AI App</div>
+          <div class="agenda-desc">
+            Connect to an AI API, send requests, and build a functional AI
+            feature in a web app.
+          </div>
+          <ul class="about-list">
+            <li>API basics & environment setup</li>
+            <li>Project: AI content helper/chatbot</li>
+            <li>Q&A and debugging</li>
+          </ul>
+        </div>
+
+        <div class="agenda-card reveal">
+          <div class="agenda-time">3:00 PM – 4:30 PM</div>
+          <div class="agenda-title">Session 3: Smart Workflows & Automation</div>
+          <div class="agenda-desc">
+            Go beyond chat — use AI for classification, summarisation and simple
+            automation tasks.
+          </div>
+          <ul class="about-list">
+            <li>Text classification & routing</li>
+            <li>Summaries, reports & insights</li>
+            <li>Project: AI-powered workflow</li>
+          </ul>
+        </div>
+
+        <div class="agenda-card reveal">
+          <div class="agenda-time">4:30 PM – 6:00 PM</div>
+          <div class="agenda-title">Session 4: Next Steps & Portfolio</div>
+          <div class="agenda-desc">
+            Learn how to package your projects, showcase them, and keep
+            improving your AI skills.
+          </div>
+          <ul class="about-list">
+            <li>Best practices & limitations</li>
+            <li>How to talk about AI projects in interviews</li>
+            <li>Open Q&A + networking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speakers -->
+  <section id="speakers">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Speakers</div>
+        <h2 class="section-title">Learn from people who ship AI in real life.</h2>
+        <p class="section-subtitle">
+          Our speakers have built AI tools used by thousands of users across
+          products, startups and internal teams.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="speaker-card reveal">
+          <div class="speaker-avatar">A</div>
+          <div class="speaker-name">Arjun Mehta</div>
+          <div class="speaker-role">AI Engineer • Product Builder</div>
+          <div class="speaker-bio">
+            Works on AI assistants for productivity tools. Loves turning complex
+            AI ideas into simple user experiences.
+          </div>
+        </div>
+
+        <div class="speaker-card reveal">
+          <div class="speaker-avatar">S</div>
+          <div class="speaker-name">Sara Khan</div>
+          <div class="speaker-role">Data Scientist • Educator</div>
+          <div class="speaker-bio">
+            Has trained and deployed ML models for finance and healthcare. Known
+            for breaking down tough concepts clearly.
+          </div>
+        </div>
+
+        <div class="speaker-card reveal">
+          <div class="speaker-avatar">R</div>
+          <div class="speaker-name">Rohit Verma</div>
+          <div class="speaker-role">Full-stack Engineer</div>
+          <div class="speaker-bio">
+            Builds end-to-end web apps powered by AI APIs; focuses on practical
+            integration and performance.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">FAQ</div>
+        <h2 class="section-title">Questions, answered.</h2>
+        <p class="section-subtitle">
+          If you’re still not sure, these might help. You can also reach out
+          with specific questions through the form below.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h3>Do I need prior AI or coding experience?</h3>
+            <div class="faq-icon">›</div>
+          </div>
+          <div class="faq-answer">
+            We assume basic computer literacy and some familiarity with HTML/JS
+            helps, but you don’t need deep AI or maths background. We keep it
+            beginner friendly and explain concepts clearly.
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h3>Do I need to bring my own laptop?</h3>
+            <div class="faq-icon">›</div>
+          </div>
+          <div class="faq-answer">
+            Yes, bring a laptop so you can follow along with live coding and
+            build the projects yourself. We’ll share setup instructions before
+            the workshop.
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-question">
+            <h3>Will I get the recordings and code?</h3>
+            <div class="faq-icon">›</div>
+          </div>
+          <div class="faq-answer">
+            You’ll get access to the slides, code templates, and selected
+            session recordings if permitted. You can reuse the code in your
+            personal or portfolio projects.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Registration -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Register</div>
+        <h2 class="section-title">Book your seat for AI Workshop 2025.</h2>
+        <p class="section-subtitle">
+          Fill in the form and we’ll confirm your slot, send payment details and
+          share pre-workshop instructions.
+        </p>
+      </div>
+
+      <div class="layout">
+        <div class="reveal">
+          <p class="contact-text">
+            Whether you’re exploring AI for the first time or want to integrate
+            it into your product or career, this workshop is your shortcut to
+            getting started the right way.
+          </p>
+
+          <ul class="contact-list">
+            <li>📍 Ranchi, India (exact venue will be shared after registration)</li>
+            <li>📞 +91-98765-43210</li>
+            <li>✉️ hello@aiworkshop2025.com</li>
+          </ul>
+
+          <div class="contact-badge">
+            <span class="contact-badge-dot"></span>
+            Typical response time: under 24 hours
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <!-- FORM: ONLY NAME, EMAIL, PHONE, CITY -->
+          <form action="#" method="post">
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+91-XXXX-XXX-XXX"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="city">City <span class="required">*</span></label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter your city"
+                required
+              />
+            </div>
+
+            <div class="form-group full">
+              <div class="checkbox-row">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms">
+                  I agree to be contacted about this workshop and related updates.
+                  <span class="required">*</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group full form-footer">
+              <div class="form-submit">
+                <button type="submit">Submit Registration</button>
+              </div>
+              <div>
+                By submitting, you agree to our terms and privacy policy. We’ll
+                never spam you or share your details.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> AI Workshop 2025. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#pricing">Tickets</a>
+        <a href="#contact">Register</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS: nav, typing, scroll reveal, counters, parallax, FAQ -->
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    if (navToggle) {
+      navToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("mobile-open");
+      });
+    }
+
+    // Year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Typing effect in hero
+    const typedText = document.getElementById("typedText");
+    const typedPhrases = [
+      "Build your first AI-powered web app in one day.",
+      "Learn how to use AI APIs the right way.",
+      "Turn ideas into working AI projects."
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const current = typedPhrases[phraseIndex];
+      if (!deleting) {
+        typedText.textContent = current.slice(0, charIndex++);
+        if (charIndex > current.length) {
+          deleting = true;
+          setTimeout(typeLoop, 1200);
+          return;
+        }
+      } else {
+        typedText.textContent = current.slice(0, charIndex--);
+        if (charIndex < 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % typedPhrases.length;
+        }
+      }
+      const speed = deleting ? 45 : 70;
+      setTimeout(typeLoop, speed);
+    }
+    if (typedText) typeLoop();
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    revealElements.forEach((el, index) => {
+      el.style.transitionDelay = `${index * 0.06}s`;
+      revealObserver.observe(el);
+    });
+
+    // Counters in hero card
+    const counters = document.querySelectorAll(".counter");
+    let countersStarted = false;
+
+    function startCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+      counters.forEach((counter) => {
+        const target = Number(counter.getAttribute("data-target") || "0");
+        let current = 0;
+        const increment = Math.max(1, Math.floor(target / 80));
+
+        function update() {
+          current += increment;
+          if (current >= target) {
+            counter.textContent = target;
+          } else {
+            counter.textContent = current;
+            requestAnimationFrame(update);
+          }
+        }
+
+        requestAnimationFrame(update);
+      });
+    }
+
+    const heroCard = document.getElementById("heroCard");
+    if (heroCard) {
+      const cardObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              startCounters();
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      cardObserver.observe(heroCard);
+    }
+
+    // Hero card parallax on mouse move
+    if (heroCard) {
+      const strength = 16;
+
+      const handleMove = (event) => {
+        const rect = heroCard.getBoundingClientRect();
+        const x = event.clientX - (rect.left + rect.width / 2);
+        const y = event.clientY - (rect.top + rect.height / 2);
+
+        const xPercent = x / (rect.width / 2);
+        const yPercent = y / (rect.height / 2);
+
+        heroCard.style.transform = `translate(${xPercent * -strength}px, ${
+          yPercent * -strength
+        }px)`;
+      };
+
+      const resetCard = () => {
+        heroCard.style.transform = "translate(0, 0)";
+      };
+
+      heroCard.addEventListener("mousemove", handleMove);
+      heroCard.addEventListener("mouseleave", resetCard);
+    }
+
+    // FAQ accordion
+    document.querySelectorAll(".faq-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+</html>
